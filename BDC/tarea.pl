@@ -68,5 +68,29 @@ lugar(educacionEspecial).
 lugar(colegioDanielHernandez).
 lugar(colegioMadreTeresaMargaritaSanchez).
 lugar(complejoEducativoWalterASoundy).
+lugar(itca).
+lugar(liceoFrances).
 
+%relaciones de los lugares
+% irDesdeHacia/2 el primer argumento es desde y el segundo es hacia
+irDesdeHacia(parqueDanielHernandez,parqueSanMartin).
+irDesdeHacia(parqueSanMartin,parqueDanielHernandez).
+
+irDesdeHacia(parqueSanMartin,elCafetalon).
+irDesdeHacia(elCafetalon,parqueSanMartin).
+
+irDesdeHacia(parqueLaFamilia,elCafetalon).
+irDesdeHacia(elCafetalon,parqueLaFamilia).
+
+irDesdeHacia(gasolineraUnoSantaTecla,centroComercialLaSkina).
+irDesdeHacia(centroComercialLaSkina,gasolineraUnoSantaTecla).
+
+irDesdeHacia(hospitalSanRafael, centroComercialLasRamblas).
+irDesdeHacia(centroComercialLasRamblas, hospialSanRafael).
+
+irDesdeHacia(texacoRvSantaTecla, centroComercialLaSkina).
+irDesdeHacia(centroComercialLaSkina, texacoRvSantaTecla).
+
+irDesdeHacia(gasolineraUnoSantaTecla,texacoRvSantaTecla).
+irDesdeHacia(texacoRvSantaTecla,gasolineraUnoSantaTecla).
 
