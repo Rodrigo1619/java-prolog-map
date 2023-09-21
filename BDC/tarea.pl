@@ -33,39 +33,40 @@
 %Colegio Madre Teresa Margarita Sánchez(13.672630124882694, -89.29479630612649)
 %Complejo Educativo Walter A. Soundy(13.680281390735583, -89.27986135878199)
 
+%Unir la lista de todos los parques, centrosEstudio, etc, a solo lugar.
+%parques
+lugar(parqueDanielHernandez).
+lugar(elCafetalon).
+lugar(parqueLaFamilia).
+lugar(parqueSanMartin).
+lugar(parqueColoniaMonteSion).
+
+%centro comerciales
+lugar(centroComercialLaSkina).
+lugar(centroComercialLasRamblas).
+lugar(plazaMerliot).
+lugar(centroComercialSantaInes).
+lugar(centroComercialDanielHernandez).
+
+%gasolinera
+lugar(gasolineraUnoSantaTecla).
+lugar(texacoRvSantaTecla).
+lugar(gasolineraUnoMerliot).
+lugar(texacoServitex).
+lugar(texacoLaSkina).
+
+%hospitales
+lugar(hospitalClimosal).
+lugar(policlinicaCasaDeSalud).
+lugar(hospitalSanRafael).
+lugar(hospitalMariaAuxiliadora).
+lugar(seguroSocial).
+
+%centro de estudios
+lugar(centroEscolarMarcelinoGarciaFlamenco).
+lugar(educacionEspecial).
+lugar(colegioDanielHernandez).
+lugar(colegioMadreTeresaMargaritaSanchez).
+lugar(complejoEducativoWalterASoundy).
 
 
-%--Lista de Parques
-parque(daniel_hernandez).
-parque(san_martin).
-parque(el_cafetalon).
-parque(la_familia).
-parque(colonia_monte_sion).
-
-%--Lista de Centros Comerciales
-centro_comercial(la_skina).
-centro_comercial(las_ramblas).
-centro_comercial(plaza_merliot).
-centro_comercial(daniel_hernandez).
-centro_comercial(santa_Ines).
-
-%--Lista de gasolinerias 
-gasolineria(uno_santa_tecla).
-gasolineria(texaco_rv_santa_tecla).
-gasolineria(uno_merliot).
-gasolineria(texaco_servitex).
-gasolineria(texaco_la_skina).
-
-%--Lsita de Hospitales
-hostipal(climosal).
-hospital(policlinica_casa_de_salud).
-hospital(san_rafael).
-hospital(maria_auxiliadora).
-hospital(seguro_social).
-
-%--Lista de Centros Estudios
-centro_estudios(marcelino_garcia_flamenco).
-centro_estudios(educacion_especial).
-centro_estudios(daniel_hernandez).
-centro_estudios(madre_teresa_margarita_sanchez).
-centro_estudios(walter_a_soundy).
