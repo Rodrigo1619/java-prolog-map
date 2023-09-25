@@ -11,6 +11,9 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputListener;
+import org.jpl7.Atom;
+import org.jpl7.Query;
+import org.jpl7.Term;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.VirtualEarthTileFactoryInfo;
 import org.jxmapviewer.input.PanMouseInputListener;
@@ -19,6 +22,10 @@ import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
 import org.jxmapviewer.viewer.WaypointPainter;
+import repositories.PlaceRepository;
+import repositories.PlaceRepositoryImpl;
+import services.PlaceService;
+import services.PlaceServiceImpl;
 import waypoint.EventWaypoint;
 import waypoint.MyWaypoint;
 import waypoint.WaypointRender;
@@ -283,6 +290,18 @@ public class Main extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        Query q1 = 
+        new Query( 
+            "consult", 
+            new Term[] {new Atom("C:\\Users\\Madriz\\Documents\\Programacion declarativa\\tarea1\\BDC\\tarea.pl")} 
+        );
+        System.out.println( "consult " + (q1.hasSolution() ? "succeeded" : "failed"));
+       
+        PlaceService placeService = new PlaceServiceImpl(new PlaceRepositoryImpl());
+        
+        placeService.printPlaces();
+        placeService.printRoad("itca", "centroComercialLasRamblas");
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
