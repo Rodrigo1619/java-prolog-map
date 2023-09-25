@@ -33,19 +33,26 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     }
 
     @Override
-    public List<String> getAllPlaces() {
+    public List<Place> getAllPlaces() {
      
-        List<String> placeList = new ArrayList<String>();
+        List<Place> placeList = new ArrayList<Place>();
+        Variable P = new Variable("P");
         Variable X = new Variable("X");
+        Variable Y = new Variable("Y");
+        
         Query places = 
         new Query( 
           "lugar", 
-          X 
+          new Term[] {P, X, Y} 
         );
         
         while ( places.hasMoreSolutions() ){ 
             Map<String, Term> binding = places.nextSolution();
-            placeList.add( binding.get("X").toString());  
+            placeList.add( new Place(
+                    binding.get("P").toString(),
+                    binding.get("X").floatValue(),
+                    binding.get("Y").floatValue()
+            ));  
         }
         
         return placeList;
@@ -84,6 +91,21 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         }
         
         return roadList;
+    }
+
+    @Override
+    public Boolean conectionExists(String startingPlace, String arrivalPlace) {
+        
+        Atom startingPlaceAtom = new Atom(startingPlace);
+        Atom arrivalPlaceAtom = new Atom(arrivalPlace);
+        
+        Query place = 
+              new Query(
+                "irDesdeHacia",
+                new Term[] { startingPlaceAtom, arrivalPlaceAtom}
+              );
+        
+        return place.hasNext();
     }
 
     

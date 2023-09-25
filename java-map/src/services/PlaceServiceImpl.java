@@ -23,19 +23,30 @@ public class PlaceServiceImpl implements PlaceService {
     
     @Override
     public void printPlaces() {
-        List<String> places = repository.getAllPlaces();
+        List<Place> places = repository.getAllPlaces();
         
-        places.stream().forEach( (p) -> {System.out.println(p);});
+        places.stream().forEach( (p) -> {
+            System.out.print("lugar: " + p.getName());
+            System.out.print("coordenada X: " + p.getX_coordinate());
+            System.out.println("coordenada Y: " + p.getY_coordinate());
+        });
     }
 
     @Override
     public void printRoad(String from, String towards) {
         List<String> placesRoad = new ArrayList<String>();
         
+        if(repository.conectionExists(from, towards)){
+            System.out.println("El camino para ir de " + from + " hacia " + towards + " es directo");
+            return;
+        }
+        
         if(repository.createRoad(from, towards)) {
             placesRoad = repository.getRoad();
             
-            System.out.println("El camino para ir de " + from + " hacia " + towards + "es :");
+            //En el caso concreto de imprimir en consola, prolog al parecer si imprime automaticamente. Por eso se ve la misma lista dos veces
+            //Igual, dejo el codigo asi para que sirva de guia para algo que no sea imprimir consola xD
+            System.out.println("El camino para ir de " + from + " hacia " + towards + " es :");
             placesRoad.stream().forEach( (p) -> {System.out.println(p);});
             return;
         }

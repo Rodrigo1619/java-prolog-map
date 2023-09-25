@@ -13,7 +13,8 @@ import java.util.List;
  */
 public interface PlaceRepository {
    Boolean placeExists(String name);
-   List<String> getAllPlaces();
+   List<Place> getAllPlaces();
    Boolean createRoad(String startingPlace, String arrivalPlace);
    List<String> getRoad();
+   Boolean conectionExists(String startingPlace, String arrivalPlace);
 }

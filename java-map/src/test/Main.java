@@ -300,6 +300,7 @@ public class Main extends javax.swing.JFrame {
         PlaceService placeService = new PlaceServiceImpl(new PlaceRepositoryImpl());
         
         placeService.printPlaces();
+        placeService.printRoad("parqueSanMartin","elCafetalon");
         placeService.printRoad("itca", "centroComercialLasRamblas");
         
         /* Create and display the form */

@@ -4,7 +4,7 @@
 %Parque deportivo El CafetalÃ³n(13.676939101610206, -89.28184656514244)
 %Parque de la Familia(13.68283967443913, -89.28246846643609)
 %Parque Colonia Monte SiÃ³n(13.68334024744733, -89.29032248751851)
-%Club tecleño (13.67760299227357, -89.28520202034052).
+%Club tecleï¿½o (13.67760299227357, -89.28520202034052).
 %parque Las Colinas (13.668521817382969, -89.28770636055769)
 %parque el principito (13.684296923933136, -89.26362101285166)
 %parque extremo merliot (13.683185482486444, -89.26617210715764)
@@ -53,54 +53,54 @@
 
 %Unir la lista de todos los parques, centrosEstudio, etc, a solo lugar.
 %parques
-lugar(parqueDanielHernandez).
-lugar(elCafetalon).
-lugar(parqueLaFamilia).
-lugar(parqueSanMartin).
-lugar(parqueColoniaMonteSion).
-lugar(clubTecleño).
-lugar(parqueLasColinas).
-lugar(parqueElPrincipito).
-lugar(parqueExtremoMerliot).
-lugar(parqueEcologicoSanJose).
+lugar(parqueDanielernandez, 13.674020416029846, -89.28877776769322).
+lugar(elCafetalon, 13.676939101610206, -89.28184656514244).
+lugar(parqueLaFamilia, 13.68283967443913, -89.28246846643609).
+lugar(parqueSanMartin, 13.674249632786998, -89.28508696769568).
+lugar(parqueColoniaMonteSion, 13.68334024744733, -89.29032248751851).
+lugar(clubTecleño, 13.67760299227357, -89.28520202034052).
+lugar(parqueLasColinas, 13.668521817382969, -89.28770636055769).
+lugar(parqueElPrincipito, 13.684296923933136, -89.26362101285166).
+lugar(parqueExtremoMerliot, 13.683185482486444, -89.26617210715764).
+lugar(parqueEcologicoSanJose, 13.687998482359259, -89.290743507989).
 
 %centro comerciales
-lugar(centroComercialLaSkina).
-lugar(centroComercialLasRamblas).
-lugar(plazaMerliot).
+lugar(centroComercialLaSkina, 13.677975677004623, -89.29765137922647).
+lugar(centroComercialLasRamblas, 13.671707761345157, -89.26835016979297).
+lugar(plazaMerliot, 13.679065920807803, -89.27542338006855).
 
 
 %gasolinera
-lugar(gasolineraUnoSantaTecla).
-lugar(texacoRvSantaTecla).
-lugar(gasolineraUnoMerliot).
-lugar(texacoLaSkina).
-lugar(pumaChiltiupan).
+lugar(gasolineraUnoSantaTecla, 13.672237397836605, -89.28350846707578).
+lugar(texacoRvSantaTecla, 13.67290892399382, -89.29744488403495).
+lugar(gasolineraUnoMerliot, 13.680074058974833, -89.27735201682775).
+lugar(texacoLaSkina, 13.67856227438191, -89.29674636504643).
+lugar(pumaChiltiupan, 13.679849066271451, -89.27379929428982).
 
-lugar(pumaElTrebol).
-lugar(unoLaUtila).
-lugar(texacoMerliot).
+lugar(pumaElTrebol, 13.671020817658627, -89.26366349524433).
+lugar(unoLaUtila, 13.663674117899944, -89.27709704562241).
+lugar(texacoMerliot, 13.67929249149876, -89.27808582431389).
 
 
 %hospitales
-lugar(hospitalClimosal).
-lugar(policlinicaCasaDeSalud).
-lugar(hospitalSanRafael).
-lugar(hospitalMariaAuxiliadora).
-lugar(seguroSocial).
+lugar(hospitalClimosal, 13.672004569590136, -89.29237148330897).
+lugar(policlinicaCasaDeSalud, 13.677529726898635, -89.29033292525632).
+lugar(hospitalSanRafael, 13.671462053675185, -89.27835950706266).
+lugar(hospitalMariaAuxiliadora, 13.676382994818589, -89.28621309508257).
+lugar(seguroSocial, 13.68032354743866, -89.28475373521991).
 
 %centro de estudios
-lugar(centroEscolarMarcelinoGarciaFlamenco).
-lugar(educacionEspecial).
-lugar(colegioSantaInes).
-lugar(colegioChampagnat).
-lugar(colegioSantaCecilia).
-lugar(colegioBelen).
-lugar(colegioMadreTeresaMargaritaSanchez).
-lugar(complejoEducativoWalterASoundy).
-lugar(itca).
-lugar(liceoFrances).
-lugar(escuelaDeComunicacionMonicaHerrera).
+lugar(centroEscolarMarcelinoGarciaFlamenco, 13.672963474955276, -89.28035526318007).
+lugar(educacionEspecial, 13.675319576622973, -89.2831018113428).
+lugar(colegioSantaInes, 13.671661073952002, -89.28597610605122).
+lugar(colegioChampagnat, 13.677830816093088, -89.28218429771488).
+lugar(colegioSantaCecilia, 13.677769095714158, -89.2873542668251).
+lugar(colegioBelen, 13.67710045724608, -89.28629204106326).
+lugar(colegioMadreTeresaMargaritaSanchez, 13.672630124882694, -89.29479630612649).
+lugar(complejoEducativoWalterASoundy, 13.680281390735583, -89.27986135878199).
+lugar(itca, 13.674133744184171, -89.27883601052127).
+lugar(liceoFrances, 13.675658076673695, -89.27543169573302).
+lugar(escuelaDeComunicacionMonicaHerrera, 13.677091189630842, -89.28801843697654).
 
 %relaciones de los lugares
 % irDesdeHacia/2 el primer argumento es desde y el segundo es hacia
@@ -175,8 +175,18 @@ irDesdeHacia(escuelaDeComunicacionMonicaHerrera,texacoLaSkina).
 irDesdeHacia(texacoLaSkina,centroComercialLaSkina).
 irDesdeHacia(centroComercialLaSkina,texacoLaSkina).
 
+irDesdeHacia(complejoEducativoWalterASoundy,colegioChampagnat).
+irDesdeHacia(colegioChampagnat,complejoEducativoWalterASoundy).
+
+irDesdeHacia(complejoEducativoWalterASoundy,texacoMerliot).
+irDesdeHacia(texacoMerliot,complejoEducativoWalterASoundy).
+
+irDesdeHacia(parqueDeLaFamilia,complejoEducativoWalterASoundy).
+irDesdeHacia(complejoEducativoWalterASoundy,parqueDeLaFamilia).
 
 
+irDesdeHacia(complejoEducativoWalterASoundy,elCafetalon).
+irDesdeHacia(elCafetalon,complejoEducativoWalterASoundy).
 
 
 
@@ -255,3 +265,16 @@ ir_hacia_rec(X, Y) :-
     ir_hacia_rec(Z, Y),
     writeln(Z),
     !.
+
+
+
+
+
+
+
+
+
+
+
+
+
