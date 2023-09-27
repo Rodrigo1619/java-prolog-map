@@ -102,6 +102,50 @@ lugar(itca).
 lugar(liceoFrances).
 lugar(escuelaDeComunicacionMonicaHerrera).
 
+
+% Calles, las 2 primeras coordenadas son de inicio y las ultimas 2 son
+% las de final
+calle(carreteraPanamericana1,13.672902, -89.280236, 13.673646, -89.300325).
+calle(carreteraPanamericana2,13.672494, -89.298596,13.671586, -89.275212).
+calle(paralelaPanamericana, 13.670802, -89.267373, 13.671897, -89.274920).
+calle(decimaAvenidaSur,13.672283, -89.293773, 13.670217, -89.293828). %10 Avenida sur
+calle(doceavaAvenidaSur,13.672293, -89.294919, 13.671264, -89.294951).
+calle(sextaCallePoniente,13.671267, -89.294919, 13.670983, -89.288205).
+calle(sextaCalleOriente, 13.670975, -89.288121,13.670604, -89.277760).
+calle(quinceavaAvenidaSur, 13.671711, -89.279068, 13.666185, -89.279345).
+calle(octavaCallePoniente, 13.670128, -89.293692, 13.669938, -89.289432).
+calle(octavaCalleOriente, 13.669876, -89.288070, 13.669473, -89.278472).
+calle(septimaAvenidaSur, 13.666535, -89.283849, 13.672934, -89.283551).
+calle(septimaAvenidaNorte,13.673086, -89.283547,13.681563, -89.283130).
+calle(quintaCallePoniente, 13.677904, -89.297126, 13.677623, -89.289100).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %relaciones de los lugares
 % irDesdeHacia/2 el primer argumento es desde y el segundo es hacia
 irDesdeHacia(parqueDanielHernandez,parqueSanMartin).
