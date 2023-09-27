@@ -175,8 +175,18 @@ irDesdeHacia(escuelaDeComunicacionMonicaHerrera,texacoLaSkina).
 irDesdeHacia(texacoLaSkina,centroComercialLaSkina).
 irDesdeHacia(centroComercialLaSkina,texacoLaSkina).
 
+irDesdeHacia(complejoEducativoWalterASoundy,colegioChampagnat).
+irDesdeHacia(colegioChampagnat,complejoEducativoWalterASoundy).
+
+irDesdeHacia(complejoEducativoWalterASoundy,texacoMerliot).
+irDesdeHacia(texacoMerliot,complejoEducativoWalterASoundy).
+
+irDesdeHacia(parqueDeLaFamilia,complejoEducativoWalterASoundy).
+irDesdeHacia(complejoEducativoWalterASoundy,parqueDeLaFamilia).
 
 
+irDesdeHacia(complejoEducativoWalterASoundy,elCafetalon).
+irDesdeHacia(elCafetalon,complejoEducativoWalterASoundy).
 
 
 
