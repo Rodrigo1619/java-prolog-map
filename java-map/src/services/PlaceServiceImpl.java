@@ -53,5 +53,10 @@ public class PlaceServiceImpl implements PlaceService {
         
         System.out.println("No se hallo camino para ir de " + from + " hacia " + towards);
     }
+
+    @Override
+    public List<Place> getAllPlaces() {
+        return repository.getAllPlaces();
+    }
     
 }

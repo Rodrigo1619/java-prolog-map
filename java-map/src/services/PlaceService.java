@@ -4,6 +4,9 @@
  */
 package services;
 
+import java.util.List;
+import models.Place;
+
 /**
  *
  * @author Madriz
@@ -11,4 +14,5 @@ package services;
 public interface PlaceService {
     void printPlaces();
     void printRoad(String from, String towards);
+    List<Place> getAllPlaces();
 }
