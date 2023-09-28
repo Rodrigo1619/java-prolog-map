@@ -105,50 +105,56 @@ lugar(escuelaDeComunicacionMonicaHerrera).
 
 % Calles, las 2 primeras coordenadas son de inicio y las ultimas 2 son
 % las de final
-calle(carreteraPanamericana1,13.672902, -89.280236, 13.673646, -89.300325).
-calle(carreteraPanamericana2,13.672494, -89.298596,13.671586, -89.275212).
-calle(paralelaPanamericana, 13.670802, -89.267373, 13.671897, -89.274920).
-calle(decimaAvenidaSur,13.672283, -89.293773, 13.670217, -89.293828). %10 Avenida sur
-calle(doceavaAvenidaSur,13.672293, -89.294919, 13.671264, -89.294951).
-calle(sextaCallePoniente,13.671267, -89.294919, 13.670983, -89.288205).
-calle(sextaCalleOriente, 13.670975, -89.288121,13.670604, -89.277760).
-calle(quinceavaAvenidaSur, 13.671711, -89.279068, 13.666185, -89.279345).
-calle(octavaCallePoniente, 13.670128, -89.293692, 13.669938, -89.289432).
-calle(octavaCalleOriente, 13.669876, -89.288070, 13.669473, -89.278472).
-calle(septimaAvenidaSur, 13.666535, -89.283849, 13.672934, -89.283551).
-calle(septimaAvenidaNorte,13.673086, -89.283547,13.681563, -89.283130).
+calle(primeraCallePoniente,13.675403, -89.289051,13.675358, -89.288035).
+calle(primeraAvenidaNorte,13.682194, -89.286547,13.674251, -89.286887).
+calle(primeraAvenidaSur,13.674143, -89.286873,13.666764, -89.287275).
+calle(segundaAvenidaNorte, 13.680168, -89.288922, 13.674361, -89.289161).
+calle(segundaAvenidaSur, 13.674257, -89.289167, 13.666888, -89.289471).
+calle(terceraCalleOriente,13.676309, -89.283493, 13.676469, -89.287875).
+calle(terceraCallePoniente, 13.676475, -89.287963,13.676843, -89.296961).
 calle(quintaCallePoniente, 13.677904, -89.297126, 13.677623, -89.289100).
-calle(treceavaCalleOriente, 13.681946, -89.282990, 13.681408, -89.277243).
-calle(calleChiltiupan,13.679649, -89.273399,13.679638, -89.283144).
-
-calle(novenaCalleOriente, 13.679646, -89.283321,13.679755, -89.285464).
-calle(novenaCallePoniente, 13.679785, -89.287825,13.679879, -89.291012).
+calle(quintaCalleOriente, 13.677578, -89.287845,13.677158, -89.278774).
 calle(sextaAvenidaNorte, 13.679841, -89.291185,13.674443, -89.291448).
 calle(sextaAvenidaSur, 13.674367, -89.291452, 13.670049, -89.291639).
+calle(sextaCallePoniente,13.671267, -89.294919, 13.670983, -89.288205).
+calle(sextaCalleOriente, 13.670975, -89.288121,13.670604, -89.277760).
+calle(septimaAvenidaNorte,13.673086, -89.283547,13.681563, -89.283130).
+calle(septimaAvenidaSur, 13.666535, -89.283849, 13.672934, -89.283551).
+calle(octavaCallePoniente, 13.670128, -89.293692, 13.669938, -89.289432).
+calle(octavaCalleOriente, 13.669876, -89.288070, 13.669473, -89.278472).
+calle(novenaCalleOriente, 13.679646, -89.283321,13.679755, -89.285464).
+calle(novenaCallePoniente, 13.679785, -89.287825,13.679879, -89.291012).
+calle(novenaAvenidaSur,13.672924, -89.282425, 13.666147, -89.282782).
+calle(decimaAvenidaSur,13.672283, -89.293773, 13.670217, -89.293828).
+calle(onceavaCalleOrienteBis,13.681302, -89.283079,13.681130, -89.279873).
+calle(doceavaAvenidaSur,13.672293, -89.294919, 13.671264, -89.294951).
+calle(doceavaCalleOriente, 13.667690, -89.288198,13.667396, -89.277913).
+calle(treceavaCalleOriente, 13.681946, -89.282990, 13.681408, -89.277243).
+calle(treceAvenidaNorte, 13.683699, -89.279683,13.677232, -89.280007).
+calle(catorceAvenidaNorte, 13.674489, -89.295911, 13.673551, -89.295961).
+calle(catorceAvenidaSur, 13.673435, -89.295967,13.671107, -89.296061).
+calle(catorceCalleOriente,13.666264, -89.282721, 13.666103, -89.278460).
+calle(catorceCalleOrienteCurva, 13.666083, -89.278430,13.665701, -89.278445).
+calle(quinceavaAvenidaNorte, 13.677173, -89.278695,13.684275, -89.278537).
+calle(quinceavaAvenidaSur, 13.671711, -89.279068, 13.666185, -89.279345).
+calle(dieciseisAvenidaNorte, 13.677873, -89.297332,13.674626, -89.295914).
+calle(diecisieteAvenidaNorte, 13.692256, -89.276675, 13.672647, -89.277579).
+calle(diecisieteAvenidaNorteArriba, 13.684827, -89.276437,13.692286, -89.276563).%esta calle es doble sentido por eso puse arriba
+calle(diecisieteAvenidaSur, 13.672479, -89.277573, 13.671724, -89.277623).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+calle(calleChiltiupanDerecha,13.679542, -89.283185,13.678077, -89.263765).
+calle(calleChiltiupanIzquierda, 13.678220, -89.263758,13.679643, -89.283183).
+calle(carreteraPanamericana1,13.672902, -89.280236, 13.673646, -89.300325).
+calle(carreteraPanamericana1Curva, 13.673652, -89.300595,13.675831, -89.304098).
+calle(carreteraPanamericana2,13.672494, -89.298596,13.671586, -89.275212).
+calle(carreteraPanamericana2Curva, 13.675815, -89.304207,13.672528, -89.298747).
+calle(paralelaPanamericana, 13.670802, -89.267373, 13.671897, -89.274920).
+calle(pConcepcion, 13.675684, -89.296250, 13.675417, -89.289187).
+calle(calleDanielJuarez, 13.674546, -89.295762, 13.674263, -89.288106).
+calle(calleJoseCiriacoLopez, 13.674256, -89.287999,13.674096, -89.283542).
+calle(pElCarmen, 13.675362, -89.287935, 13.675196, -89.283475).
+calle(calleParalelaASantaRosa, 13.677966, -89.297776, 13.674117, -89.296007).
+calle(pasajeSanMartin, 13.669848, -89.288265, 13.666794, -89.288342).
 
 
 

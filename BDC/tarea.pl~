@@ -118,6 +118,13 @@ calle(octavaCalleOriente, 13.669876, -89.288070, 13.669473, -89.278472).
 calle(septimaAvenidaSur, 13.666535, -89.283849, 13.672934, -89.283551).
 calle(septimaAvenidaNorte,13.673086, -89.283547,13.681563, -89.283130).
 calle(quintaCallePoniente, 13.677904, -89.297126, 13.677623, -89.289100).
+calle(treceavaCalleOriente, 13.681946, -89.282990, 13.681408, -89.277243).
+calle(calleChiltiupan,13.679649, -89.273399,13.679638, -89.283144).
+
+calle(novenaCalleOriente, 13.679646, -89.283321,13.679755, -89.285464).
+calle(novenaCallePoniente, 13.679785, -89.287825,13.679879, -89.291012).
+calle(sextaAvenidaNorte, 13.679841, -89.291185,13.674443, -89.291448).
+calle(sextaAvenidaSur, 13.674367, -89.291452, 13.670049, -89.291639).
 
 
 
