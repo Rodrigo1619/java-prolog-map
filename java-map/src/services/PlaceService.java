@@ -6,6 +6,7 @@ package services;
 
 import java.util.List;
 import models.Place;
+import models.StreetPoint;
 
 /**
  *
@@ -15,4 +16,7 @@ public interface PlaceService {
     void printPlaces();
     void printRoad(String from, String towards);
     List<Place> getAllPlaces();
+    List<StreetPoint> getAllStreetPoints();
+    void chop();
+    List<StreetPoint> getRoad(String from, String towards);
 }

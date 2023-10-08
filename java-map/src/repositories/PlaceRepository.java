@@ -7,6 +7,7 @@ package repositories;
 import models.Place;
 import java.util.List;
 import models.Street;
+import models.StreetPoint;
 
 /**
  *
@@ -18,7 +19,11 @@ public interface PlaceRepository {
    List<Place> getAllPlaces();
    
    Boolean createRoad(String startingPlace, String arrivalPlace);
-   List<String> getRoad();
+   List<StreetPoint> getRoad();
+   
+   StreetPoint getStreetPoint(String name);
+   
+   List<StreetPoint> getAllPoints();
    
    Boolean conectionExists(String startingPlace, String arrivalPlace);
    List<Street> getAllStreet();

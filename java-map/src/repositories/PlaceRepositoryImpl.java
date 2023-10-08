@@ -79,23 +79,81 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     }
 
     @Override
-    public List<String> getRoad() {
-        List<String> roadList = new ArrayList<String>();
+    public List<StreetPoint> getRoad() {
+        List<StreetPoint> pointList = new ArrayList<StreetPoint>();
         
         Variable X = new Variable("X");
-        Query places = 
+        Query points = 
         new Query( 
-          "eslabon", 
+          "puntoCalle", 
           X 
         );
         
-        while ( places.hasMoreSolutions() ){ 
-            Map<String, Term> binding = places.nextSolution();
-            roadList.add( binding.get("X").toString());  
+        while ( points.hasMoreSolutions() ){ 
+            Map<String, Term> binding = points.nextSolution();
+            
+            pointList.add( new StreetPoint(
+                    binding.get("N").toString(),
+                    binding.get("X").floatValue(),
+                    binding.get("Y").floatValue()
+            ));  
+        }  
+        
+        return pointList;
+    }
+    
+    
+    @Override
+    public StreetPoint getStreetPoint(String name) {
+        
+        Variable X = new Variable("X");
+        Variable Y = new Variable("Y");
+        Variable Z = new Variable("Z");
+        Atom pointname = new Atom(name);
+        Query point = 
+        new Query( 
+          "puntoCalle",
+          new Term[] { Z, pointname, X, Y}
+        );
+        
+        if(point.hasSolution()){
+            Map<String, Term> binding = point.nextSolution();
+            return new StreetPoint(
+                    pointname.toString(),
+                    binding.get("X").floatValue(),
+                    binding.get("Y").floatValue()
+            );
         }
         
-        return roadList;
+        return null;
     }
+
+    @Override
+    public List<StreetPoint> getAllPoints() {
+        List<StreetPoint> pointList = new ArrayList<StreetPoint>();
+        
+        
+        Variable S = new Variable("S");
+        Variable N = new Variable("N");
+        Variable X = new Variable("X");
+        Variable Y = new Variable("Y");
+        
+        Query points = 
+        new Query( 
+          "puntoCalle",
+          new Term[] { S, N, X, Y}
+        );
+        
+        while ( points.hasMoreSolutions() ){ 
+            Map<String, Term> binding = points.nextSolution();
+            
+            StreetPoint p = getStreetPoint(binding.get("X").toString());
+            
+            if(p != null)
+                pointList.add( p);  
+        }
+        
+        return pointList;}
 
     @Override
     public Boolean conectionExists(String startingPlace, String arrivalPlace) {
@@ -149,11 +207,14 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         Street[] streetList = this.getAllStreet().toArray(new Street[0]);
         
         int n = streetList.length;
-        n=1; //TODO: Quitar esto despues
         StreetPoint[][] matriz = new StreetPoint[n][n+1];
         
         for (int i = 0; i < n; i++) {
-            for (int j = 1; j < n; j++) {
+            for (int j = 0; j < n; j++) {
+                
+                if (i == 49 && j > 48) {
+                    int dummy = 13; // <= put breakpoint here
+                }
                 if( i == j){
                     matriz[i][j] = new StreetPoint(
                     streetList[i].getName()+"_End",
@@ -161,6 +222,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
                     streetList[i].getY2()
                 );
                 }
+                
                 
                 if( i < j){
                     matriz[i][j] = getIntersection( streetList[i], streetList[j]);
@@ -180,8 +242,6 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             
             matriz[i][n] = init;
             Arrays.sort( matriz[i], new PointCmp(init));
-            
-            init = null;
         }
         
         for (int i = 0; i < n; i++){
@@ -189,38 +249,41 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             insertPoint(streetList[i].getName(), matriz[i][0]);
             
             for (int j = 1; j < n; j++){
-                insertPoint(streetList[i].getName(), matriz[i][j]);
-                //TODO: Hay que ver como optimizar que un mismo punto(intersección) no se agrege varias veces por la misma calle.
-                
-                Query createConection = 
-                        new Query( 
-                            "\"assert(irDesdeHacia("+
-                                    matriz[i][j-1].getName()+","+
-                                    matriz[i][j].getName()+","+
-                            "))\"" 
-                );
+                if(matriz[i][j] != null){
+                    insertPoint(streetList[i].getName(), matriz[i][j]);
+                    //TODO: Hay que ver como optimizar que un mismo punto(intersección) no se agrege varias veces por la misma calle.
+
+                    Query createConection = 
+                            new Query( 
+                                "assert(irDesdeHacia("+
+                                        matriz[i][j-1].getName()+","+
+                                        matriz[i][j].getName()+
+                                "))" 
+                    );
+                    createConection.hasSolution();
+                }
             }
         }
         
-        Query tell = new Query("\"tell(puntos.pl)\"");
+        Query tell = new Query("tell('puntos.pl')");
         tell.hasSolution();
-        tell = new Query("\"listing(puntoCalle)\"");
+        tell = new Query("listing(puntoCalle)");
         tell.hasSolution();
-        tell = new Query("\"listing(irDesdeHacia)\"");
+        tell = new Query("listing(irDesdeHacia)");
         tell.hasSolution();
-        tell = new Query("\"told()\"");
+        tell = new Query("told()");
         tell.hasSolution(); 
     }
     
     public Boolean insertPoint(String street, StreetPoint point){
         Query insertPoint = 
             new Query( 
-                "\"assert(puntoCalle("+
+                "assert(puntoCalle("+
                         street +","+
                         point.getName() + ","+
                         point.getX() + ","+
-                        point.getY() + ","+
-                "))\"" 
+                        point.getY()+
+                "))" 
             );
         return insertPoint.hasSolution();
     }
@@ -230,16 +293,17 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             double S2X1 = s2.getX1(), S2X2 = s2.getX2(), S2Y1 = s2.getY1(), S2Y2 = s2.getY2();
         
             double m1 = (S1Y2-S1Y1)/(S1X2-S1X1);
-            double b1 = -(m1*S1X2 + S1Y2);
+            double b1 = -m1*S1X2 + S1Y2;
             
             double m2 = (S2Y2-S2Y1)/(S2X2-S2X1);
-            double b2 = -(m2*S2X2 + S2Y2);
+            double b2 = -m2*S2X2 + S2Y2;
             
-            double x = (b2-b1)/(m1-m1);
+            double x = (b2-b1)/(m1-m2);
             double y = m1*x + b1;
             
             if( between(x, S1X1, S1X2) && between(x, S2X1, S2X2)
                 && between(y, S1Y1, S1Y2) && between(y, S2Y1, S2Y2)) {
+                
                 return new StreetPoint(
                         s1.getName() + "X" + s2.getName(),
                         x,
@@ -254,7 +318,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         double min = (n1 < n2) ? n1 : n2;
         double max = (n1 > n2) ? n1 : n2;
         
-        return (number > min && number < max );
+        return (number >= min && number <= max );
     }
 }
 
@@ -268,6 +332,15 @@ class PointCmp implements Comparator<StreetPoint> {
         
         
         public int compare(StreetPoint a, StreetPoint b) {
+            
+            if (a == null && b == null) {
+                return 0; // Ambos son nulos, son iguales
+            } else if (a == null) {
+                return +1; // a es nulo, b es no nulo, a es mayor
+            } else if (b == null) {
+                return -1; // a es no nulo, b es nulo, b es mayor
+            };
+            
             double d1 = a.distanceTo(init);
             double d2 = b.distanceTo(init);
             
