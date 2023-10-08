@@ -58,7 +58,7 @@ lugar(elCafetalon, 13.676939101610206, -89.28184656514244).
 lugar(parqueLaFamilia, 13.68283967443913, -89.28246846643609).
 lugar(parqueSanMartin, 13.674249632786998, -89.28508696769568).
 lugar(parqueColoniaMonteSion, 13.68334024744733, -89.29032248751851).
-lugar(clubTecle�o, 13.67760299227357, -89.28520202034052).
+lugar(clubTecleño, 13.67760299227357, -89.28520202034052).
 lugar(parqueLasColinas, 13.668521817382969, -89.28770636055769).
 lugar(parqueElPrincipito, 13.684296923933136, -89.26362101285166).
 lugar(parqueExtremoMerliot, 13.683185482486444, -89.26617210715764).
@@ -394,8 +394,8 @@ irDesdeHacia(parqueSanMartin,colegioSantaInes).
 irDesdeHacia(parqueSanMartin,colegioBelen).
 irDesdeHacia(colegioBelen,parqueSanMartin).
 
-irDesdeHacia(colegioBelen,clubTecle�o).
-irDesdeHacia(clubTecle�o,colegioBelen).
+irDesdeHacia(colegioBelen,clubTecleño).
+irDesdeHacia(clubTecleño,colegioBelen).
 
 irDesdeHacia(colegioSantaCecilia,colegioBelen).
 irDesdeHacia(colegioBelen,colegioSantaCecilia).
@@ -478,8 +478,8 @@ irDesdeHacia(complejoEducativoWalterASoundy, plazaMerliot).
 irDesdeHacia(colegioSantaCecilia,colegioBelen).
 irDesdeHacia(colegioSantaCecilia,escuelaDeComunicacionMonicaHerrera).
 
-irDesdeHacia(clubTecle�o,colegioChampagnat).
-irDesdeHacia(colegioChampagnat,clubTecle�o).
+irDesdeHacia(clubTecleño,colegioChampagnat).
+irDesdeHacia(colegioChampagnat,clubTecleño).
 
 irDesdeHacia(elCafetalon,colegioChampagnat).
 irDesdeHacia(colegioChampagnat,elCafetalon).
@@ -624,26 +624,31 @@ irDesdeHacia(pasajeSanMartin_Init, pasajeSanMartin_End).
 
 %ir_hacia/2
 ir_hacia(X,Y):-
+    abolish(eslabon_prov,1),
     abolish(eslabon,1),
-    assert(eslabon(X)),
+    assert(eslabon_prov(Y)),
     ir_hacia_rec(X,Y),
-    writeln(X).
+    assert(eslabon(Y)),
+    writeln(Y).
 
 ir_hacia_rec(X,Y):-
     irDesdeHacia(X,Y),
-    writeln(Y),
-    assert(eslabon(Y)),
+    writeln(X),
+    assert(eslabon(X)),
+    assert(eslabon_prov(X)),
     !.
-ir_hacia_rec(X, _) :-
+ir_hacia_rec(_, Y) :-
     irDesdeHacia(X, Y),
-    eslabon(Y),
+    eslabon_prov(X),
     fail.
+
 ir_hacia_rec(X, Y) :-
-    irDesdeHacia(X, Z),
-    not(eslabon(Z)),
-    assert(eslabon(Z)),
-    ir_hacia_rec(Z, Y),
+    irDesdeHacia(Z, Y),
+    not(eslabon_prov(Z)),
+    assert(eslabon_prov(Z)),
+    ir_hacia_rec(X, Z),
     writeln(Z),
+    assert(eslabon(Z)),
     !.
 
 
