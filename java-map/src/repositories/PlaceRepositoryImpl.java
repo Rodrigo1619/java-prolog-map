@@ -82,21 +82,27 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     public List<StreetPoint> getRoad() {
         List<StreetPoint> pointList = new ArrayList<StreetPoint>();
         
-        Variable X = new Variable("X");
+        Variable N = new Variable("N");
         Query points = 
         new Query( 
-          "puntoCalle", 
-          X 
+          "eslabon", 
+          N
         );
         
         while ( points.hasMoreSolutions() ){ 
-            Map<String, Term> binding = points.nextSolution();
+            Map<String, Term> binding1 = points.nextSolution();
             
-            pointList.add( new StreetPoint(
-                    binding.get("N").toString(),
+            Query p = new Query("puntoCalle(_,"+binding1.get("N") + ", X,Y)");
+            
+            Map<String, Term> binding = p.oneSolution();
+            
+            if(binding != null){
+                pointList.add( new StreetPoint(
+                    binding1.get("N").toString(),
                     binding.get("X").floatValue(),
                     binding.get("Y").floatValue()
-            ));  
+                ));
+            }
         }  
         
         return pointList;
@@ -212,9 +218,6 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 
-                if (i == 49 && j > 48) {
-                    int dummy = 13; // <= put breakpoint here
-                }
                 if( i == j){
                     matriz[i][j] = new StreetPoint(
                     streetList[i].getName()+"_End",
