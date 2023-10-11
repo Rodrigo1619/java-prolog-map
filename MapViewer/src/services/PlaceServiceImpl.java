@@ -7,6 +7,7 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 import models.Place;
+import models.StreetPoint;
 import repositories.PlaceRepository;
 
 /**
@@ -34,7 +35,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public void printRoad(String from, String towards) {
-        List<String> placesRoad = new ArrayList<String>();
+        List<StreetPoint> placesRoad = new ArrayList<StreetPoint>();
         
         if(repository.conectionExists(from, towards)){
             System.out.println("El camino para ir de " + from + " hacia " + towards + " es directo");
@@ -47,7 +48,7 @@ public class PlaceServiceImpl implements PlaceService {
             //En el caso concreto de imprimir en consola, prolog al parecer si imprime automaticamente. Por eso se ve la misma lista dos veces
             //Igual, dejo el codigo asi para que sirva de guia para algo que no sea imprimir consola xD
             System.out.println("El camino para ir de " + from + " hacia " + towards + " es :");
-            placesRoad.stream().forEach( (p) -> {System.out.println(p);});
+            placesRoad.stream().forEach( (p) -> {System.out.println(p.getName());});
             return;
         }
         
@@ -58,5 +59,24 @@ public class PlaceServiceImpl implements PlaceService {
     public List<Place> getAllPlaces() {
         return repository.getAllPlaces();
     }
+
+    @Override
+    public void chop() {
+        repository.chopStreet();
+    }
+
+    @Override
+    public List<StreetPoint> getAllStreetPoints() {
+        
+        return repository.getAllPoints();
+    }
+
+    @Override
+    public List<StreetPoint> getRoad(String from, String towards) {
+        repository.createRoad(from, towards);
+        
+        return repository.getRoad();
+    }
+
     
 }

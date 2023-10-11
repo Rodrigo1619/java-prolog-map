@@ -19,51 +19,51 @@
         <URL value="@mainview.css" />
     </stylesheets>
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="mainBorderPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="281.0" style="-fx-background-color: #282828;" BorderPane.alignment="CENTER">
+            <VBox fx:id="vboxSelectionPlaces" alignment="TOP_CENTER" prefHeight="720.0" prefWidth="281.0" style="-fx-background-color: #282828;" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgviewIcon" fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../res/icons/Maps_1.png" />
                            </image>
                         </ImageView>
-                        <Label text="MAPS" textFill="WHITE">
+                        <Label minHeight="0.0" minWidth="0.0" text="MAPS" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="31.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <VBox alignment="TOP_CENTER" prefWidth="100.0" spacing="20.0">
+                  <VBox alignment="TOP_CENTER" minHeight="0.0" minWidth="0.0" prefWidth="100.0" spacing="20.0">
                      <children>
-                        <Label text="Ingrese el lugar desde deonde parte" textAlignment="CENTER" textFill="WHITE">
+                        <Label minHeight="0.0" minWidth="0.0" text="Ingrese el lugar desde deonde parte" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="cmbStart" onAction="#handleStartAction" prefHeight="25.0" prefWidth="233.0" />
+                        <ComboBox fx:id="cmbStart" minHeight="0.0" minWidth="0.0" onAction="#handleStartAction" prefHeight="25.0" prefWidth="233.0" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" prefWidth="100.0" spacing="20.0">
+                  <VBox alignment="TOP_CENTER" minHeight="0.0" minWidth="0.0" prefWidth="100.0" spacing="20.0">
                      <children>
-                        <Label text="Ingrese el lugar que desea ir:" textAlignment="CENTER" textFill="WHITE">
+                        <Label minHeight="0.0" minWidth="0.0" text="Ingrese el lugar que desea ir:" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="cmbEnd" onAction="#handleEndAction" prefHeight="25.0" prefWidth="233.0" />
+                        <ComboBox fx:id="cmbEnd" minHeight="0.0" minWidth="0.0" onAction="#handleEndAction" prefHeight="25.0" prefWidth="233.0" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="240.0" stylesheets="@../res/css/buttonStyle.css" text="Buscar">
+                  <Button fx:id="btnSearch" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#handleSearchAction" prefHeight="33.0" prefWidth="240.0" stylesheets="@../res/css/buttonStyle.css" text="Buscar">
                      <font>
                         <Font size="15.0" />
                      </font>

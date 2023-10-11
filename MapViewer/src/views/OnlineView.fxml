@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane fx:id="panelOnline" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00ddff;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.OnlineController">
+<StackPane fx:id="panelOnline" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="1087.0" style="-fx-background-color: #00ddff;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.OnlineController">
    <children>
       <ComboBox fx:id="cmbMapType" onAction="#handleMapTypeAction" prefWidth="150.0" promptText="Choose" StackPane.alignment="TOP_RIGHT">
          <StackPane.margin>
             <Insets right="20.0" top="20.0" />
          </StackPane.margin>
       </ComboBox>
+      <ListView fx:id="listviewPlaces" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" onMouseClicked="#expandir" onMouseDragged="#mover" prefHeight="400.0" prefWidth="300.0" StackPane.alignment="BOTTOM_RIGHT">
+         <StackPane.margin>
+            <Insets bottom="20.0" right="20.0" />
+         </StackPane.margin>
+      </ListView>
+      <Button id="arrow-button" fx:id="btnSidePanel" mnemonicParsing="false" onAction="#handleSidePanelAction" prefHeight="68.0" prefWidth="41.0" styleClass="arrow-button" stylesheets="@../res/css/slideStyle.css" StackPane.alignment="CENTER_LEFT" />
    </children>
 </StackPane>
