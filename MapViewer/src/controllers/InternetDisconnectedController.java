@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,8 +26,9 @@ import javafx.scene.layout.StackPane;
  * @author Zepeda22
  */
 public class InternetDisconnectedController implements Initializable {
-
     
+    private OnlineController onlineControler;
+    private MainController mainControler;
     @FXML
     private Button btnReconnect;
     @FXML
@@ -70,7 +72,26 @@ public class InternetDisconnectedController implements Initializable {
     }
 
     @FXML
-    private void handleForceAction(ActionEvent event) {
+    private void handleForceAction(ActionEvent event) throws IOException {
+        /*onlineControler.panelOnline.getChildren().clear();
+        SwingNode node = new SwingNode();
+        onlineControler.setSwingNode(node);*/
+        mainControler.setOnlienView();
+        
+        
+        
+       
     }
     
+    public void setOnlineController(OnlineController controller){
+     this.onlineControler = controller;
+    }
+    
+    public void setMainController(MainController controller){
+     this.mainControler = controller;
+    }
+    
+    public InternetDisconnectedController getInternerDisconnectedController(){
+     return this;
+    }
 }

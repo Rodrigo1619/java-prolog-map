@@ -23,10 +23,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import models.Place;
+import models.StreetPoint;
 import org.jpl7.Atom;
 import org.jpl7.Query;
 import org.jpl7.Term;
@@ -42,21 +45,31 @@ import utils.AccessWifi;
  * @author Zepeda22
  */
 public class MainController implements Initializable {
-    FXMLLoader viewOnline;
-    FXMLLoader viewOffline;
-    FXMLLoader viewInternetDisconnected;
+    public FXMLLoader viewOnline;
+    public FXMLLoader viewInternetDisconnected;
     
     
-    List<String> Places = new ArrayList<String>();
+    public final List<String> Places = new ArrayList<String>();
     
+    public PlaceService placeService = new PlaceServiceImpl(new PlaceRepositoryImpl());
+    
+    private OnlineController onlineController;
+    private InternetDisconnectedController internetDisconnectedController;
     //private BorderPane viewBorderPanel;
-    private ComboBox<String> cmbArrive;
     @FXML
     private StackPane viewStackPanel;
     @FXML
     private ComboBox<String> cmbStart;
     @FXML
     private ComboBox<String> cmbEnd;
+    @FXML
+    public BorderPane mainBorderPane;
+    @FXML
+    private VBox vboxSelectionPlaces;
+    @FXML
+    private ImageView imgviewIcon;
+    @FXML
+    private Button btnSearch;
 
     /**
      * Initializes the controller class.
@@ -64,102 +77,56 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-       // System.out.println("File path: " + );
-        String path = new File("res/prologfiles/tarea.pl").getAbsolutePath().replace("\\", "\\\\");
-      //  String[] splitPath = pathWithoutSplit.split("\\\\", -2);
-        //System.err.println(splitPath.length);
-        
-        /* for (String a : splitPath)
-             path.concat( a +" \\");
-         */
- 
-        //System.out.println(a);
-       
+
         Query q1 = 
         new Query( 
             "consult", 
-            //new Term[] {new Atom("C:\\Users\\Zepeda22\\Documents\\NetBeansProjects\\MapViewer\\src\\res\\prologfiles\\tarea.pl")} 
            new Term[] {new Atom("src\\res\\prologfiles\\tarea.pl")}
         );
-        //Query q1 = new Query("consult('"+ path +"')");
         
         System.out.println( "consult " + (q1.hasSolution() ? "succeeded" : "failed"));
         
-        PlaceService placeService = new PlaceServiceImpl(new PlaceRepositoryImpl());
+        
          
         for (Place tempPlace: placeService.getAllPlaces() ){
             Places.add(tempPlace.getName()) ;
         }
         
-        //System.out.println(Places.size());
+        
         ObservableList<String> lPlaces = FXCollections.observableList(Places);
-         cmbStart.setItems(lPlaces);
-         cmbEnd.setItems(lPlaces);
+        cmbStart.setItems(lPlaces);
+        cmbEnd.setItems(lPlaces);
          
         System.out.println("java version: "+System.getProperty("java.version"));
         System.out.println("javafx.version: " + System.getProperty("javafx.version"));
-         /*for(String a : placeService.getPlaces())
-         Places = ;*/
-         
-         /*Places.forEach( place -> {
-          place.getName();
-         
-         });*/
-         //cmbArrive.setItems(Places.);
-         //for(Place tempPlace : Places)
-         //System.out.println( Places.);
+
         
-      
+        viewOnline = new FXMLLoader(getClass().getResource("/views/OnlineView.fxml"));
+        viewInternetDisconnected = new FXMLLoader(getClass().getResource("/views/InternetDisconnectedView.fxml"));
+
+        
         try {
             //Create
-            viewOnline = new FXMLLoader(getClass().getResource("/views/OnlineView.fxml"));
-            viewStackPanel.getChildren().add(0,viewOnline.load());
-            viewOffline = new FXMLLoader(getClass().getResource("/views/OfflineView.fxml"));
-            viewStackPanel.getChildren().add(1,viewOffline.load());
-             viewStackPanel.getChildren().get(1).setVisible(false);
-            //viewBorderPanel.setCenter(FXMLLoader.load(getClass().getResource("/views/OnlineView.fxml")));
+               if(AccessWifi.isInternetAvailable()){
+                    viewStackPanel.getChildren().add(viewOnline.load());
+                    onlineController = viewOnline.getController();
+                    onlineController.setViewInternetDisconnected(viewInternetDisconnected);
+                    onlineController.setPlaces(Places);
+                    onlineController.mainController(this);
+                     onlineController.setRoad(placeService.getRoad("primeraAvenidaNorte_Init", "septimaAvenidaNorte_End"));
+               }else{
+                   viewStackPanel.getChildren().add(viewInternetDisconnected.load());
+               
+               }
 
-          
-                
-            //viewStackPanel.getChildren().add( FXMLLoader.load(getClass().getResource("/views/OnlineView.fxml")));
-    
-             //viewStackPanel.getChildren().add( FXMLLoader.load(getClass().getResource("/views/InternetDisconnectedView.fxml")));
-
-            //viewStackPanel.getChildren().add( FXMLLoader.load(getClass().getResource("/views/OfflineView.fxml")));
-            
-           
-             //System.err.println( viewStackPanel.getChildren().get(0).getParent().getBoundsInLocal());
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }  
 
-    private void handleOnlineAction(ActionEvent event) throws IOException {
-       
-        //viewBorderPanel.getChildren().clear();
-      
-        viewStackPanel.getChildren().get(1).translateYProperty().set(0);
-           viewStackPanel.getChildren().get(1).translateXProperty().set(0);
-         
-        viewStackPanel.getChildren().get(1).setVisible(false);
-        viewStackPanel.getChildren().get(0).setVisible(true);
-         
-          //viewStackPanel.getChildren().get(0).setLayoutY(0);
-       
-        //viewBorderPanel.getChildren().add( FXMLLoader.load(getClass().getResource("/views/OnlineView.fxml")));
-        //viewBorderPanel.setCenter(FXMLLoader.load(getClass().getResource("/views/OnlineView.fxml")));
-    }
 
-    private void handleOfflineAction(ActionEvent event) throws IOException {
-       
-        viewStackPanel.getChildren().get(0).translateYProperty().set(0);
-           viewStackPanel.getChildren().get(0).translateXProperty().set(0);
-        //viewBorderPanel.getChildren().clear();
-        viewStackPanel.getChildren().get(0).setVisible(false);
-        viewStackPanel.getChildren().get(1).setVisible(true);
-        //viewBorderPanel.getChildren().add( FXMLLoader.load(getClass().getResource("/views/OfflineView.fxml")));
-        //viewBorderPanel.setCenter(FXMLLoader.load(getClass().getResource("/views/OfflineView.fxml")));
-    }
+
+
 
     @FXML
     private void handleStartAction(ActionEvent event) {
@@ -172,5 +139,28 @@ public class MainController implements Initializable {
     private void handleEndAction(ActionEvent event) {
     }
     
+    public void toogleSidePanel(boolean state){
+        if(state==true){
+            vboxSelectionPlaces.setMaxWidth(281);
+            imgviewIcon.setFitWidth(96);
+        }else{
+            vboxSelectionPlaces.setMaxWidth(0);
+            imgviewIcon.setFitWidth(0);
+        }
+     
+    }
+
+    @FXML
+    private void handleSearchAction(ActionEvent event) {
+      
+        onlineController.setRoad(  placeService.getRoad(cmbStart.getValue(), cmbEnd.getValue()));
+    }
+    
+    public void setOnlienView() throws IOException{
+        viewStackPanel.getChildren().clear();
+        viewStackPanel.getChildren().add(0,viewOnline.load());
+        
+        
+    }
     
 }
