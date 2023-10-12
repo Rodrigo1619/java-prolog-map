@@ -10,7 +10,7 @@ import java.util.Comparator;
  *
  * @author Madriz
  */
-public class StreetPoint /*implements Comparable<StreetPoint>*/{
+public class StreetPoint implements Point/*implements Comparable<StreetPoint>*/{
 
     public String getName() {
         return name;
@@ -36,9 +36,9 @@ public class StreetPoint /*implements Comparable<StreetPoint>*/{
     private double y;
 
     
-    public double distanceTo(StreetPoint anotherPoint) {
-        double dx = x - anotherPoint.x;
-        double dy = y - anotherPoint.y;
+    public double distanceTo(Point anotherPoint) {
+        double dx = x - anotherPoint.getX();
+        double dy = y - anotherPoint.getY();
         return Math.sqrt(dx * dx + dy * dy);
     }
     

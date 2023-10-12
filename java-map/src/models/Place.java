@@ -8,7 +8,7 @@ package models;
  *
  * @author Madriz
  */
-public class Place {
+public class Place implements Point{
 
     private String name;
     private Float x_coordinate;
@@ -25,6 +25,16 @@ public class Place {
     }
 
     public Float getY_coordinate() {
+        return y_coordinate;
+    }
+    
+    @Override
+    public double getX() {
+        return x_coordinate;
+    }
+
+    @Override
+    public double getY() {
         return y_coordinate;
     }
     
