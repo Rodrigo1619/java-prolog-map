@@ -52,23 +52,7 @@ public class InternetDisconnectedController implements Initializable {
 
     @FXML
     private void handleReconnectAction(ActionEvent event) throws IOException {
-        /* FXMLLoader viewOnline = new FXMLLoader(getClass().getResource("/views/OnlineView.fxml"));
-        OnlineController a = viewOnline.getController();
-        a.reconnect();*/
-        FXMLLoader viewOnline = new FXMLLoader(getClass().getResource("/views/OnlineView.fxml"));
-         Parent root = (Parent) viewOnline.load();
-          OnlineController onlineController = viewOnline.getController();
-        if(onlineController.reconnect()){
-             Node father = this.panelInternetDisconnected.getParent();
-            if(father instanceof StackPane pane){
-            pane.getChildren().remove(panelInternetDisconnected);
-            
-            }
-        }
-       
-       /*if(viewOnline.getController().equals(null)){
-           System.out.println("ES NULO");
-       }*/
+       mainControler.setOnlineViewReconnect();
     }
 
     @FXML
@@ -76,7 +60,7 @@ public class InternetDisconnectedController implements Initializable {
         /*onlineControler.panelOnline.getChildren().clear();
         SwingNode node = new SwingNode();
         onlineControler.setSwingNode(node);*/
-        mainControler.setOnlienView();
+        mainControler.setOnlienViewForce();
         
         
         

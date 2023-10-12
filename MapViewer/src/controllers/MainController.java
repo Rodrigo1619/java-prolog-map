@@ -57,7 +57,7 @@ public class MainController implements Initializable {
     private InternetDisconnectedController internetDisconnectedController;
     //private BorderPane viewBorderPanel;
     @FXML
-    private StackPane viewStackPanel;
+    public StackPane viewStackPanel;
     @FXML
     private ComboBox<String> cmbStart;
     @FXML
@@ -107,15 +107,11 @@ public class MainController implements Initializable {
         
         try {
             //Create
+            System.out.println("INTERNET STATE:" + AccessWifi.isInternetAvailable());
                if(AccessWifi.isInternetAvailable()){
-                    viewStackPanel.getChildren().add(viewOnline.load());
-                    onlineController = viewOnline.getController();
-                    onlineController.setViewInternetDisconnected(viewInternetDisconnected);
-                    onlineController.setPlaces(Places);
-                    onlineController.mainController(this);
-                     onlineController.setRoad(placeService.getRoad("primeraAvenidaNorte_Init", "septimaAvenidaNorte_End"));
+                   setOnlienViewForce();
                }else{
-                   viewStackPanel.getChildren().add(viewInternetDisconnected.load());
+                   setInternetDisconnectedForce();
                
                }
 
@@ -156,11 +152,29 @@ public class MainController implements Initializable {
         onlineController.setRoad(  placeService.getRoad(cmbStart.getValue(), cmbEnd.getValue()));
     }
     
-    public void setOnlienView() throws IOException{
-        viewStackPanel.getChildren().clear();
-        viewStackPanel.getChildren().add(0,viewOnline.load());
-        
-        
+    public void setOnlienViewForce() throws IOException{
+        viewStackPanel.getChildren().add(viewOnline.load());
+        onlineController = viewOnline.getController();
+        onlineController.setViewInternetDisconnected(viewInternetDisconnected);
+        onlineController.setPlaces(Places);
+        onlineController.mainController(this);
+        onlineController.setRoad(placeService.getRoad("primeraAvenidaNorte_Init", "septimaAvenidaNorte_End"));
+        btnSearch.setDisable(false);
+    
+    }
+    
+    public void setInternetDisconnectedForce() throws IOException{
+         viewStackPanel.getChildren().add(viewInternetDisconnected.load());
+         InternetDisconnectedController controller = viewInternetDisconnected.getController();
+         controller.setMainController(this);
+         btnSearch.setDisable(true);
+    
+    }
+    
+    public void setOnlineViewReconnect() throws IOException{
+        if(AccessWifi.isInternetAvailable()){
+                   setOnlienViewForce();
+        }
     }
     
 }
