@@ -96,10 +96,10 @@ public class Street {
 
         double m = (end.getY()-init.getY())/(end.getX()-init.getX());
         double b1 = -m*end.getX() + end.getY();
-        double b2 = m*pl.getX() + pl.getY();
+        double b2 = pl.getX()/m + pl.getY();
 
-        double x = (b2-b1)/(2*m);
-        double y = m*x + b1;
+        double x = (b2-b1)/(m+1/m);
+        double y = x*m + b1;
                 
         if( this.pointBelongs(x, y)) {
 

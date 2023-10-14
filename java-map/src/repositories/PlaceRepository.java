@@ -29,4 +29,8 @@ public interface PlaceRepository {
    List<Street> getAllStreet();
    
    void chopStreet();
+   Boolean insertPoint( StreetPoint point);
+   Boolean createConnection(String name1, String name2);
+   Boolean createRelation(String name1, String name2);
+   
 }

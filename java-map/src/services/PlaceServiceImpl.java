@@ -7,6 +7,7 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 import models.Place;
+import models.Street;
 import models.StreetPoint;
 import repositories.PlaceRepository;
 
@@ -75,6 +76,12 @@ public class PlaceServiceImpl implements PlaceService {
     public List<StreetPoint> getRoad(String from, String towards) {
         repository.createRoad(from, towards);
         
+        return repository.getRoad();
+    }
+
+    @Override
+    public List<StreetPoint> getStreetRoad(Street st) {
+    repository.createRoad(st.getInit().getName(), st.getEnd().getName());
         return repository.getRoad();
     }
 

@@ -226,13 +226,20 @@ public class PlaceRepositoryImpl implements PlaceRepository {
                 StreetPoint temp = streetList[j].nearestPoint(placeList[i]);
                 
                 if(temp != null){
-                    if(temp.distanceTo(temp) < distance){
+                    if(temp.distanceTo(placeList[i]) < distance){
                         nearestPoint = temp;
                         index = j;
+                        distance = temp.distanceTo(placeList[i]);
                     }
                 }
+                
             }
+                if(i==35)
+                    i=35;
+                
             matriz[index][n+i] = nearestPoint;
+            createConnection(nearestPoint.getName(), placeList[i].getName());
+            createConnection(placeList[i].getName(), nearestPoint.getName());
         }
         
         for (int i = 0; i < n; i++) {
@@ -258,13 +265,14 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         for (int i = 0; i < n; i++){
   
             insertPoint(matriz[i][0]);
+            //createRelation(streetList[i].getName(), matriz[i][0].getName());
             
             for (int j = 1; j < (n+m+1); j++){
                 if(insertPoint(matriz[i][j])){
                     //TODO: Hay que ver como optimizar que un mismo punto(intersección) no se agrege varias veces por la misma calle.
 
-                    createConnection(matriz[i][j-1].getName(), matriz[i][j].getName());
-                    createRelation(streetList[i].getName(), matriz[i][j].getName());
+                    //createConnection(matriz[i][j-1].getName(), matriz[i][j].getName());
+                    //createRelation(streetList[i].getName(), matriz[i][j].getName());
                 }
             }
         }
