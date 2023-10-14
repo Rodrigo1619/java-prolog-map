@@ -19,9 +19,9 @@ import java.net.UnknownHostException;
 public class AccessWifi {
     public static boolean isInternetAvailable() throws IOException
     {
-        return isHostAvailable("google.com") ;
+        return isHostAvailable("google.com"); 
         //|| isHostAvailable("amazon.com")
-               // || isHostAvailable("facebook.com")|| isHostAvailable("apple.com");
+        //|| isHostAvailable("facebook.com")|| isHostAvailable("apple.com");
     }
     
     private static boolean isHostAvailable(String hostName) throws IOException
