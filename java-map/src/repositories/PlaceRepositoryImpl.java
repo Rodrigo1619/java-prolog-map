@@ -96,14 +96,16 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             
             Map<String, Term> binding = p.oneSolution();
             
-            if(binding != null){
-                pointList.add( new StreetPoint(
+            if(binding == null){
+                p = new Query("lugar("+binding1.get("N") + ", X,Y)");
+                binding = p.oneSolution();
+            }  
+            pointList.add( new StreetPoint(
                     binding1.get("N").toString(),
                     binding.get("X").floatValue(),
                     binding.get("Y").floatValue()
                 ));
-            }
-        }  
+        }
         
         return pointList;
     }
@@ -151,7 +153,11 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         while ( points.hasMoreSolutions() ){ 
             Map<String, Term> binding = points.nextSolution();
             
-            StreetPoint p = getStreetPoint(binding.get("X").toString());
+            StreetPoint p = new StreetPoint(
+                    binding.get("N").toString(),
+                    binding.get("X").floatValue(),
+                    binding.get("Y").floatValue()
+            );
             
             if(p != null)
                 pointList.add( p);  
@@ -206,6 +212,35 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     }
 
     @Override
+    public List<StreetPoint> getStreetRoad(String streetName) {
+        List<StreetPoint> pointList = new ArrayList<StreetPoint>();
+        
+        
+        Variable N = new Variable("N");
+        Variable X = new Variable("X");
+        Variable Y = new Variable("Y");
+        
+        Query points = 
+        new Query( "poseeA("+streetName+", N), puntoCalle(N,X,Y).");
+        
+        while ( points.hasMoreSolutions() ){ 
+            Map<String, Term> binding = points.nextSolution();
+            
+            StreetPoint p = new StreetPoint(
+                    binding.get("N").toString(),
+                    binding.get("X").floatValue(),
+                    binding.get("Y").floatValue()
+            );
+            
+            if(p != null)
+                pointList.add( p);  
+        }
+        
+        return pointList;
+    }
+
+    
+    @Override
     public void chopStreet() {
         
         Street[] streetList = this.getAllStreet().toArray(new Street[0]);
@@ -238,22 +273,21 @@ public class PlaceRepositoryImpl implements PlaceRepository {
                     i=35;
                 
             matriz[index][n+i] = nearestPoint;
-            createConnection(nearestPoint.getName(), placeList[i].getName());
             createConnection(placeList[i].getName(), nearestPoint.getName());
+            createConnection(nearestPoint.getName(), placeList[i].getName());
         }
         
         for (int i = 0; i < n; i++) {
-            
-            matriz[i][i] = streetList[i].getInit();
-            
+                        
             for (int j = 0; j < n; j++) {
                 if( i < j)
                     matriz[i][j] = streetList[i].getIntersection( streetList[j]);
                 
-                if( i > j)
+                if( i > j) 
                     matriz[i][j] = matriz[j][i];
             }
-            
+            matriz[i][i] = matriz[i][0];
+            matriz[i][0] = streetList[i].getInit();
             matriz[i][n+m] = streetList[i].getEnd();
         }
         
@@ -265,27 +299,33 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         for (int i = 0; i < n; i++){
   
             insertPoint(matriz[i][0]);
-            //createRelation(streetList[i].getName(), matriz[i][0].getName());
+            createRelation(streetList[i].getName(), matriz[i][0].getName());
             
             for (int j = 1; j < (n+m+1); j++){
                 if(insertPoint(matriz[i][j])){
                     //TODO: Hay que ver como optimizar que un mismo punto(intersección) no se agrege varias veces por la misma calle.
 
-                    //createConnection(matriz[i][j-1].getName(), matriz[i][j].getName());
-                    //createRelation(streetList[i].getName(), matriz[i][j].getName());
+                    createConnection(matriz[i][j-1].getName(), matriz[i][j].getName());
+                    createRelation(streetList[i].getName(), matriz[i][j].getName());
                 }
             }
         }
         
-        Query tell = new Query("tell('puntos.pl')");
+        
+        Query equalsPoints = new Query("assert((irDesdeHacia(A,B) :- \\=(A,B) ,puntoCalle(A, X,Y), puntoCalle(B,X,Y)))");
+        equalsPoints.hasSolution();
+        
+        String filePath = "..\\MapViewer\\src\\res\\prologfiles\\tarea.pl";
+        Query tell = new Query("tell", new Term[] { new Atom(filePath) });
         tell.hasSolution();
+        System.out.println("Pues paso");
         tell = new Query("listing(lugar)");
         tell.hasSolution();
         tell = new Query("listing(calle)");
         tell.hasSolution();
         tell = new Query("listing(puntoCalle)");
         tell.hasSolution();
-        tell = new Query("listing(perteneceA)");
+        tell = new Query("listing(poseeA)");
         tell.hasSolution();
         tell = new Query("listing(irDesdeHacia)");
         tell.hasSolution();
@@ -347,14 +387,14 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         if(name1.equals(name2))
             return false;
         
-        Query exists = new Query( "perteneceA(" + name1 + "," + name2 + ")" );
+        Query exists = new Query( "poseeA(" + name1 + "," + name2 + ")" );
         
         if(exists.hasSolution())
             return true;
          
         Query createConnection = 
                 new Query( 
-                    "assert(perteneceA("+
+                    "assert(poseeA("+
                             name1+","+
                             name2+
                     "))" 

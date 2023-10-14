@@ -63,6 +63,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public void chop() {
+        System.out.println("Esto da exceptcion por alguna razon");
         repository.chopStreet();
     }
 
@@ -74,16 +75,19 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public List<StreetPoint> getRoad(String from, String towards) {
-        repository.createRoad(from, towards);
+        if(repository.createRoad(from, towards))
+            return repository.getRoad();
         
-        return repository.getRoad();
+        return new ArrayList<StreetPoint>();
     }
 
     @Override
     public List<StreetPoint> getStreetRoad(Street st) {
-    repository.createRoad(st.getInit().getName(), st.getEnd().getName());
-        return repository.getRoad();
+        return repository.getStreetRoad(st.getName());
     }
 
-    
+    @Override
+    public List<Street> getAllStreets() {
+        return repository.getAllStreet();
+    }
 }

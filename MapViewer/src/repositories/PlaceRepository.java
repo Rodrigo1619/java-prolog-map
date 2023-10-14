@@ -24,6 +24,7 @@ public interface PlaceRepository {
    StreetPoint getStreetPoint(String name);
    
    List<StreetPoint> getAllPoints();
+   List<StreetPoint> getStreetRoad(String streetName);
    
    Boolean conectionExists(String startingPlace, String arrivalPlace);
    List<Street> getAllStreet();

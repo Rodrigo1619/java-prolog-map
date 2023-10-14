@@ -78,7 +78,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         return place.hasNext();
     }
 
-    @Override
+        @Override
     public List<StreetPoint> getRoad() {
         List<StreetPoint> pointList = new ArrayList<StreetPoint>();
         
@@ -96,14 +96,16 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             
             Map<String, Term> binding = p.oneSolution();
             
-            if(binding != null){
-                pointList.add( new StreetPoint(
+            if(binding == null){
+                p = new Query("lugar("+binding1.get("N") + ", X,Y)");
+                binding = p.oneSolution();
+            }  
+            pointList.add( new StreetPoint(
                     binding1.get("N").toString(),
                     binding.get("X").floatValue(),
                     binding.get("Y").floatValue()
                 ));
-            }
-        }  
+        }
         
         return pointList;
     }
@@ -151,7 +153,11 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         while ( points.hasMoreSolutions() ){ 
             Map<String, Term> binding = points.nextSolution();
             
-            StreetPoint p = getStreetPoint(binding.get("X").toString());
+            StreetPoint p = new StreetPoint(
+                    binding.get("N").toString(),
+                    binding.get("X").floatValue(),
+                    binding.get("Y").floatValue()
+            );
             
             if(p != null)
                 pointList.add( p);  
@@ -205,6 +211,34 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         return streetList;
     }
 
+    @Override
+    public List<StreetPoint> getStreetRoad(String streetName) {
+        List<StreetPoint> pointList = new ArrayList<StreetPoint>();
+        
+        
+        Variable N = new Variable("N");
+        Variable X = new Variable("X");
+        Variable Y = new Variable("Y");
+        
+        Query points = 
+        new Query( "poseeA("+streetName+", N), puntoCalle(N,X,Y).");
+        
+        while ( points.hasMoreSolutions() ){ 
+            Map<String, Term> binding = points.nextSolution();
+            
+            StreetPoint p = new StreetPoint(
+                    binding.get("N").toString(),
+                    binding.get("X").floatValue(),
+                    binding.get("Y").floatValue()
+            );
+            
+            if(p != null)
+                pointList.add( p);  
+        }
+        
+        return pointList;
+    }
+    
     @Override
     public void chopStreet() {
         
@@ -277,7 +311,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         tell.hasSolution();
         tell = new Query("listing(puntoCalle)");
         tell.hasSolution();
-        tell = new Query("listing(perteneceA)");
+        tell = new Query("listing(poseeA)");
         tell.hasSolution();
         tell = new Query("listing(irDesdeHacia)");
         tell.hasSolution();
@@ -339,14 +373,14 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         if(name1.equals(name2))
             return false;
         
-        Query exists = new Query( "perteneceA(" + name1 + "," + name2 + ")" );
+        Query exists = new Query( "poseeA(" + name1 + "," + name2 + ")" );
         
         if(exists.hasSolution())
             return true;
          
         Query createConnection = 
                 new Query( 
-                    "assert(perteneceA("+
+                    "assert(poseeA("+
                             name1+","+
                             name2+
                     "))" 
