@@ -77,16 +77,17 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-
+       // File file = new File("src\\res\\prologfiles\\tarea.pl");  
         Query q1 = 
         new Query( 
             "consult", 
            new Term[] {new Atom("src\\res\\prologfiles\\tarea.pl")}
+
         );
         
         System.out.println( "consult " + (q1.hasSolution() ? "succeeded" : "failed"));
         
-        
+
          
         for (Place tempPlace: placeService.getAllPlaces() ){
             Places.add(tempPlace.getName()) ;
@@ -158,7 +159,7 @@ public class MainController implements Initializable {
         onlineController.setViewInternetDisconnected(viewInternetDisconnected);
         onlineController.setPlaces(Places);
         onlineController.mainController(this);
-        onlineController.setRoad(placeService.getRoad("primeraAvenidaNorte_Init", "septimaAvenidaNorte_End"));
+        //onlineController.setRoad(placeService.getRoad("primeraAvenidaNorte_Init", "septimaAvenidaNorte_End"));
         btnSearch.setDisable(false);
     
     }

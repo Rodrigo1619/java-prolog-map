@@ -9,7 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="MapViewer" default="default" basedir=".">
     <description>Builds, tests, and runs the project MapViewer.</description>
-    <import file="nbproject/build-impl.xml"/>
+    <import file="nbproject/build-impl.xml"/> 
     <!--
 
     There exist several targets which are by default empty and which can be 
@@ -70,4 +70,7 @@
     nbproject/build-impl.xml file. 
 
     -->
-</project>
+     
+
+</project> 
+

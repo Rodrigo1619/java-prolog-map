@@ -401,6 +401,7 @@ public class OnlineController implements Initializable {
         System.out.println("Tamaño:" + pointsStreet.size());
         routingData = new ArrayList<>();
          this.listviewPlaces.getItems().clear();
+           this.listviewPlaces.getItems().add("CAMINO QUE SIGUIÓ: ");
       for (StreetPoint street : pointsStreet){
           
           this.listviewPlaces.getItems().add(street.getName());

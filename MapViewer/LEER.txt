@@ -1,0 +1,3 @@
+Se necesita 
+JDK 20
+JAVAFX 20.0.2
